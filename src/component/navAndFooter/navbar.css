@@ -20,6 +20,11 @@
   cursor: pointer;
 }
 
+.nav-input .btn{
+  background-color: var(--primary) !important;
+  color: white;
+}
+
 .navbar .buttons {
   /* padding-left: 1rem; */
   display: flex;

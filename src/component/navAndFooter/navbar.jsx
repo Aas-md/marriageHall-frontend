@@ -1,7 +1,8 @@
 import './navbar.css'
 import { FaTentArrowsDown } from "react-icons/fa6"
-import { IoSearch } from "react-icons/io5";
-import 'bootstrap/dist/js/bootstrap.bundle.min.js';
+import { IoSearch } from "react-icons/io5"
+import 'bootstrap/dist/js/bootstrap.bundle.min.js'
+import 'bootstrap/dist/css/bootstrap.min.css'
 
 export default function Navbar() {
   return (
@@ -33,7 +34,7 @@ export default function Navbar() {
         aria-label="Search"
       />
       <button
-        className="btn btn-success d-flex align-items-center gap-2"
+        className="btn d-flex align-items-center gap-2"
         type="submit"
       >
         <IoSearch /> Search

@@ -1,0 +1,36 @@
+.home-card {
+    display: flex;
+    /* inline-flex ki zarurat nahi */
+    flex-direction: column;
+    gap: 0.25rem;
+    border: 1px solid rgba(128, 128, 128, 0.2);
+    border-radius: 0.5rem;
+    width: 100%;
+    max-width: 300px;
+  
+}
+
+
+
+.home-card img {
+    border-radius: 0.5rem 0.5rem 0 0;
+    height: auto;
+    width: 100%;
+    object-fit: cover;
+}
+
+.card-title {
+
+    font-weight: 600;
+}
+
+.home-page {
+    margin-top: 4rem;
+}
+
+
+
+.home-card:hover{
+      box-shadow: 1px 1px 6px grey;
+      cursor: pointer;
+}

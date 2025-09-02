@@ -1,11 +1,18 @@
 import { HomeCard } from "../component/homeCard.jsx"
+import './homepage.css'
 
 export function HomePage() {
     return (
 
-        <div className="container text-center mt-5">
-            <h1 className="text-danger">Hello Bootstrap + React</h1>
-            <button className="btn btn-success">Click Me</button>
+        <div className="home-page">
+            <HomeCard />
+            {/* <HomeCard />
+            <HomeCard />
+            <HomeCard />
+            <HomeCard />
+            <HomeCard />
+            <HomeCard /> */}
+
         </div>
 
     )
