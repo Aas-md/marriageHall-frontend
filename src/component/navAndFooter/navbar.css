@@ -1,0 +1,54 @@
+.navbar {
+
+  padding: 1rem !important;
+  background-color: white;
+  z-index: 1000;
+  /* so it stays above content */
+  border-bottom: 1px solid rgba(128, 128, 128, 0.3)
+}
+
+.navbar .logo .icon {
+  font-size: 2.5rem;
+  color: var(--primary);
+}
+
+.navbar .logo {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 1rem;
+  cursor: pointer;
+}
+
+.navbar .buttons {
+  /* padding-left: 1rem; */
+  display: flex;
+  gap: 1rem !important;
+}
+
+.navbar .buttons span{
+  cursor: pointer;
+}
+
+.logout{
+  display: none;
+}
+
+
+
+
+@media (max-width: 768px) {
+  .buttons span {
+  
+    text-align: center;
+
+  }
+
+  .nav-input input,
+  .nav-input button {
+    margin-top: 1.5rem;
+    padding: 4px 8px;
+  }
+
+
+}
