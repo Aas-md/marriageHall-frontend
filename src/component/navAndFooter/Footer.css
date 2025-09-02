@@ -1,4 +1,4 @@
-.f-info{
+.f-info {
     text-align: center;
     height: 8rem;
     background-color: #ebebeb;
@@ -7,30 +7,32 @@
     flex-wrap: wrap;
     justify-content: space-evenly;
     align-items: center;
+  
+
 }
 
-.f-info-socials{
+.f-info-socials {
     width: 100%;
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
-.f-info-socials .icon{
+.f-info-socials .icon {
     font-size: 1.5rem;
     margin-right: 1rem;
 }
 
-.f-info-links a{
+.f-info-links a {
     text-decoration: none;
-    color:  #222222;
+    color: #222222;
 }
 
-.f-info-links a:hover{
+.f-info-links a:hover {
     text-decoration: underline;
 }
 
-.f-info-socials .icon:hover{
+.f-info-socials .icon:hover {
 
     color: blue;
     cursor: pointer;

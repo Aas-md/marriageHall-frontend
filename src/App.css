@@ -3,6 +3,16 @@
   --secondary: #3333ff;
 }
 
-main {
-  padding: 20px;
+.main-page {
+  padding: 20px 0;
+}
+
+.app {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh; /* full screen height */
+}
+
+.main-page {
+  flex: 1; /* take remaining space */
 }
