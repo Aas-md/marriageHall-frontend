@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import ShowCard from "../component/ShowCard";
 import './showpage.css'
 import getListing from "../controller/showController";
+import Review from "../component/review";
 
 export default function ShowPage(){
 
@@ -24,6 +25,8 @@ export default function ShowPage(){
     return (
         <div className="show-page">
             <ShowCard listing={listing}/>
+            <hr />
+            <Review listing={listing.review}/>
         </div>
     )
 }
