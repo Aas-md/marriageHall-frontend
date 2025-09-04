@@ -3,7 +3,6 @@
   padding: 1rem !important;
   background-color: white;
   z-index: 1000;
-  /* so it stays above content */
   border-bottom: 1px solid rgba(128, 128, 128, 0.3)
 }
 

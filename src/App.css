@@ -3,10 +3,6 @@
   --secondary: #3333ff;
 }
 
-.main-page {
-  padding: 20px 0;
-}
-
 .app {
   display: flex;
   flex-direction: column;

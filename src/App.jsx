@@ -2,6 +2,7 @@ import Navbar from './component/navAndFooter/navbar'
 import './App.css'
 import { HomePage } from './pages/HomePage'
 import Footer from './component/navAndFooter/Footer';
+import ShowPage from './pages/ShowPage';
 
 function App() {
 
@@ -9,7 +10,7 @@ function App() {
     <div className='app'>
       <Navbar />
       <main className='main-page'>
-        <HomePage />
+        <ShowPage/>
       </main>
       <Footer/>
     </div>

@@ -13,7 +13,5 @@ export function HomeCard({listing}) {
         <span>{listing.city}</span>
         <span>₹ {listing.price}/night</span>
       </div>
-
-
   )
 }

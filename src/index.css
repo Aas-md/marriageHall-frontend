@@ -5,5 +5,7 @@
   
 }
 
-  
+  body {
+  padding-top: 73px; /* Navbar ki height ke barabar */
+}
 
