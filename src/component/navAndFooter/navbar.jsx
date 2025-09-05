@@ -3,8 +3,16 @@ import { FaTentArrowsDown } from "react-icons/fa6"
 import { IoSearch } from "react-icons/io5"
 import 'bootstrap/dist/js/bootstrap.bundle.min.js'
 import 'bootstrap/dist/css/bootstrap.min.css'
+import { useNavigate } from "react-router-dom"
 
 export default function Navbar() {
+
+   const navigate = useNavigate()
+  let handleSignup = ()=>{
+      console.log('handle signup')
+        navigate("/signup")
+  }
+
   return (
     <nav className="navbar fixed-top navbar-expand-md ">
   
@@ -45,7 +53,7 @@ export default function Navbar() {
   {/* Buttons */}
   <div className="buttons ms-auto d-flex flex-column flex-md-row">
     <span >Add new listing</span>
-    <span >Signup</span>
+    <span onClick={handleSignup}>Signup</span>
     <span>Login</span>
     <span className='logout'>Logout</span>
   </div>

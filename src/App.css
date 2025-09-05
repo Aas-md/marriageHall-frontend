@@ -12,3 +12,9 @@
 .main-page {
   flex: 1; /* take remaining space */
 }
+
+.eye-btn{
+   position: absolute;
+  right: 26%;
+  top: 69%;
+}

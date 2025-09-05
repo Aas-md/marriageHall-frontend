@@ -1,3 +1,10 @@
 .show-page{
     padding: 2rem 13rem;
 }
+
+.show-page .reviews{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    row-gap: 1rem;
+}

@@ -8,7 +8,8 @@ export default function mapListing(data){
             city : data.city,
             image : data.image?.url,
             price : data.price,
-           ownerName : data.owner?.username
+           ownerName : data.owner?.username,
+           reviews : data.reviews
         }
 
         return curr
