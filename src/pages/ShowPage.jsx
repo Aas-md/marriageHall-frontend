@@ -3,6 +3,7 @@ import ShowCard from "../component/ShowCard";
 import './showpage.css'
 import getListing from "../controller/showController";
 import Review from "../component/review";
+import AddReview from "../component/AddReview";
 
 export default function ShowPage() {
 
@@ -25,6 +26,9 @@ export default function ShowPage() {
     return (
         <div className="show-page">
             <ShowCard listing={listing} />
+            <hr />
+            <h1>Leave a review</h1>
+            <AddReview/>
             <hr />
             <div className="reviews">
                 {
