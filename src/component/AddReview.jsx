@@ -1,15 +1,32 @@
 import { useState } from 'react'
 import { FaStar } from 'react-icons/fa'
 import './addReview.css'
+import { addReviewCntr } from '../controller/reviewController'
 
-export default function AddReview() {
+
+export default function AddReview({ listingId, onAdded }) {
+    // let listingId = '68b6d8c34dc1e23fca63db3c'
     let [rating, setRating] = useState(3)
+    let [comment, setComment] = useState('')
     const [validated, setValidated] = useState(false)
 
-    let handleSubmit = (e) => {
-        e.preventDefault(); // stop reload
+    let handleSubmit = async (e) => {
+        e.preventDefault() // stop reload
         setValidated(true)
-        console.log("submitted");
+        // console.log(comment,rating)
+        let res = await addReviewCntr(listingId, comment, rating)
+        // const newReviewClean = {
+        //     _id: res.review._id,
+        //     comment: res.review.comment,
+        //     rating: res.review.rating,
+        //     author: res.review.author,
+        //     createdAt: res.review.createdAt,
+        // };
+        onAdded?.(res.review);
+
+        setComment('');
+        setRating(3);
+
     }
 
     return (
@@ -30,10 +47,10 @@ export default function AddReview() {
                     ))}
                 </div>
                 <div className="form-group mb-3">
-                    <label htmlFor="comment" className="form-label">Comment</label>
-                    <textarea className='form-control' required name="comment" id="comment" rows={5}></textarea>
+                    <label htmlFor="comment" className="form-label" >Comment</label>
+                    <textarea className='form-control' required name="comment" id="comment" rows={5} value={comment} onChange={(e) => setComment(e.target.value)}></textarea>
                     <div className="valid-feedback">Loosk Good!</div>
-                      <div className="invalid-feedback">Please enter a comment.</div>
+                    <div className="invalid-feedback">Please enter a comment.</div>
 
                 </div>
                 <button className='btn btn-outline-dark'>Submit</button>
