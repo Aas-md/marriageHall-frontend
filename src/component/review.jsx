@@ -5,8 +5,6 @@ import { deleteReview } from '../controller/reviewController'
 
 export default function Review({ review, listingId, onDeleted }) {
 
-  // let listingId = '68b6d8c34dc1e23fca63db3c'
-
   let reviewId = review._id
 
   const onDeleteClick = async () => {
@@ -31,7 +29,6 @@ export default function Review({ review, listingId, onDeleted }) {
             key={n}
             size={30}
             color={n <= review.rating ? "gold" : "lightgray"}
-            // onClick={() => setRating(n)}
             style={{ marginRight: 5 }}
           />
         ))}

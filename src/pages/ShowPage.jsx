@@ -4,10 +4,13 @@ import './showpage.css'
 import getListing from "../controller/showController";
 import Review from "../component/review";
 import AddReview from "../component/AddReview";
+import { useParams } from "react-router-dom";
 
 
 export default function ShowPage() {
 
+    const {listingId} = useParams()
+ 
     let alreadyFetched = false;
     let [listing, setListing] = useState([])
     const [reviews, setReviews] = useState(listing.reviews || [])
@@ -16,31 +19,28 @@ export default function ShowPage() {
         setReviews((prev) => prev.filter((r) => r._id !== reviewId))
     }
 
-
     const handleReviewAdded = (newReview) => {
 
         setReviews(prev => {
-            const newArr = [...prev, newReview]; // bottom pe add karne ke liye
+            const newArr = [...prev, newReview]
             return newArr;
         });
 
     }
 
-
-
-
     const called = useRef(false)
+
     useEffect(() => {
-        if (called.current) return // prevent double call
+        if (called.current) return 
         called.current = true
 
         let fetch = async () => {
 
-            let data = await getListing()
+            let data = await getListing(listingId)
             setListing(data)
             console.log(data)
             if (data.reviews?.length > 0) {
-                setReviews(data.reviews) // reviews tabhi set ho jab listing aa jaaye
+                setReviews(data.reviews) 
             }
         }
         fetch()
@@ -72,12 +72,3 @@ export default function ShowPage() {
         </div>
     )
 }
-
-
-
-
-//  {
-//                     listing.reviews ? listing.reviews.map((review, id) => (
-//                         <Review review={review} key={id} />
-//                     )) : <p>No reviews yet</p>
-//                 }

@@ -1,7 +1,7 @@
-import { useEffect, useState } from "react";
-import { IoEye } from "react-icons/io5";
-import { IoMdEyeOff } from "react-icons/io";
-import { authSignup } from "../controller/authController";
+import { useEffect, useState } from "react"
+import { IoEye } from "react-icons/io5"
+import { IoMdEyeOff } from "react-icons/io"
+import { authSignup } from "../controller/authController"
 
 
 export default function SignupPage() {

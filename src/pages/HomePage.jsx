@@ -9,7 +9,7 @@ export function HomePage() {
     let [listings, setListings] = useState([])
     const called = useRef(false)
     useEffect(() => {
-        if (called.current) return; // prevent double call
+        if (called.current) return
         called.current = true
     
         let getListings = async () => {

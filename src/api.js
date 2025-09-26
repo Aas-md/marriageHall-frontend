@@ -18,8 +18,11 @@ export async function fetchAllListings() {
   }
 }
 
-export async function fetchListing() {
-  let url = 'http://localhost:3000/listings/68b6d8c34dc1e23fca63db3c'
+export async function fetchListing(listingId) {
+  // let url = 'http://localhost:3000/listings/68b6d8c34dc1e23fca63db3c'
+  let url = `http://localhost:3000/listings/${listingId}`
+
+
   try {
     let response = await fetch(url)
     if (!response.ok) {
@@ -74,7 +77,7 @@ export async function addReview(listingId, comment, rating) {
 }
 
 export async function deleteReviewApi(listingId, reviewId) {
-  
+
   const url = `http://localhost:3000/listings/${listingId}/reviews/${reviewId}`;
   const token = localStorage.getItem('token');
 
@@ -82,12 +85,12 @@ export async function deleteReviewApi(listingId, reviewId) {
     method: 'DELETE',
     headers: {
       'Content-Type': 'application/json',
-      Authorization: `Bearer ${token}`, 
+      Authorization: `Bearer ${token}`,
     },
   });
 
   if (!response.ok) {
- 
+
     const error = await response.json().catch(() => ({}))
     throw new Error(error.message || 'Failed to delete review')
   }
@@ -95,12 +98,50 @@ export async function deleteReviewApi(listingId, reviewId) {
   return await response.json();
 }
 
+
+export async function loginApi(username = "", password = "") {
+  const url = "http://localhost:3000/login"
+  if (!username || !password) {
+    throw new Error("Please fill all the fields")
+  }
+
+  try {
+    const res = await fetch(url, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ username, password }),
+    });
+
+    if (!res.ok) {
+      // agar status 200–299 nahi hai to error
+      const errText = await res.text()
+      throw new Error(errText || "Login failed in !res.ok")
+    }
+
+    // response ko json me convert karo
+    const data = await res.json()
+    localStorage.setItem('token', data.token)
+    console.log(data.token)
+
+    // jo bhi backend return kare (token, user info etc.)
+    console.log(data)
+    return data
+  } catch (err) {
+    console.log('error in Login', err)
+    throw new Error(err || "Login failed")
+  }
+
+}
+
+
 export async function signup(username = "", password = "", email = "") {
   const url = "http://localhost:3000/signup";
 
   // simple check
   if (!username || !password || !email) {
-    throw new Error("Please fill all the fields");
+    throw new Error("Please fill all the fields")
   }
 
   try {
@@ -114,12 +155,13 @@ export async function signup(username = "", password = "", email = "") {
 
     if (!res.ok) {
       // convert error body if needed
-      const errorText = await res.text();
+      const errorText = await res.text()
       throw new Error(errorText || "Signup failed")
     }
 
     // parse JSON response
     const data = await res.json()
+
     localStorage.setItem('token', data.token)
 
     return data;

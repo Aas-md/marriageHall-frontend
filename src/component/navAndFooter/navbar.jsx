@@ -9,16 +9,25 @@ export default function Navbar() {
 
    const navigate = useNavigate()
   let handleSignup = ()=>{
-      console.log('handle signup')
+     
         navigate("/signup")
+  }
+
+  const handleHomeNavigate = () => {
+    navigate(`/`) // navigation inside component
+  };
+
+  let handleLogin = ()=>{
+
+    navigate('/LoginPage')
   }
 
   return (
     <nav className="navbar fixed-top navbar-expand-md ">
   
       <div className="logo d-flex align-items-center">
-        <FaTentArrowsDown className="icon me-2" />
-        <span>Explore</span>
+        <FaTentArrowsDown onClick={handleHomeNavigate} className="icon me-2" />
+        <span onClick={handleHomeNavigate}>Explore</span>
       </div>
 
       {/* Hamburger toggler */}
@@ -54,7 +63,7 @@ export default function Navbar() {
   <div className="buttons ms-auto d-flex flex-column flex-md-row">
     <span >Add new listing</span>
     <span onClick={handleSignup}>Signup</span>
-    <span>Login</span>
+    <span onClick={handleLogin}>Login</span>
     <span className='logout'>Logout</span>
   </div>
 </div>

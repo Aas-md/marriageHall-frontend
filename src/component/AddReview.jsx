@@ -11,19 +11,10 @@ export default function AddReview({ listingId, onAdded }) {
     const [validated, setValidated] = useState(false)
 
     let handleSubmit = async (e) => {
-        e.preventDefault() // stop reload
+        e.preventDefault() 
         setValidated(true)
-        // console.log(comment,rating)
         let res = await addReviewCntr(listingId, comment, rating)
-        // const newReviewClean = {
-        //     _id: res.review._id,
-        //     comment: res.review.comment,
-        //     rating: res.review.rating,
-        //     author: res.review.author,
-        //     createdAt: res.review.createdAt,
-        // };
-        onAdded?.(res.review);
-
+        onAdded?.(res.review)
         setComment('');
         setRating(3);
 

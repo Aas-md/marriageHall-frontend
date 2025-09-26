@@ -5,6 +5,7 @@ import Footer from './component/navAndFooter/Footer';
 import ShowPage from './pages/ShowPage';
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import SignupPage from './pages/SignupPage'
+import LoginPage from './pages/LoginPage';
 
 function App() {
 
@@ -14,8 +15,10 @@ function App() {
       <Navbar />
       <main className='main-page'>
          <Routes>
-            <Route path="/" element={<ShowPage />} />
+            <Route path="/" element={<HomePage />} />
+             <Route path="/showpage/:listingId" element={<ShowPage />}/>
               <Route path="/signup" element={<SignupPage />} />
+              <Route path="/LoginPage" element={<LoginPage />} />
          </Routes>
       
       </main>
