@@ -6,12 +6,16 @@ import ShowPage from './pages/ShowPage';
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import SignupPage from './pages/SignupPage'
 import LoginPage from './pages/LoginPage';
+import { Toaster } from "react-hot-toast";
+
 
 function App() {
 
   return (
      <BrowserRouter>
     <div className='app'>
+         {/* <Toaster /> */}
+          <Toaster position="top-center" reverseOrder={false} />
       <Navbar />
       <main className='main-page'>
          <Routes>
@@ -19,6 +23,8 @@ function App() {
              <Route path="/showpage/:listingId" element={<ShowPage />}/>
               <Route path="/signup" element={<SignupPage />} />
               <Route path="/LoginPage" element={<LoginPage />} />
+
+               
          </Routes>
       
       </main>

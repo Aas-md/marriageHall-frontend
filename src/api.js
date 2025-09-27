@@ -155,8 +155,9 @@ export async function signup(username = "", password = "", email = "") {
 
     if (!res.ok) {
       // convert error body if needed
-      const errorText = await res.text()
-      throw new Error(errorText || "Signup failed")
+      const errorData = await res.json();
+      throw errorData || "Signup failed"; //
+    
     }
 
     // parse JSON response
@@ -166,7 +167,7 @@ export async function signup(username = "", password = "", email = "") {
 
     return data;
   } catch (err) {
-    console.error("Signup error:", err)
+
     throw err // rethrow so caller can handle
   }
 }

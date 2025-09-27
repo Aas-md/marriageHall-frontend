@@ -18,3 +18,32 @@
   right: 26%;
   top: 69%;
 }
+
+.flash-msg {
+  position: fixed;
+  top: 20px;                 /* top se distance */
+  left: 50%;                 /* horizontally center karne ke liye */
+  transform: translateX(-50%); /* exact center */
+  background: #4caf50;       /* green success color */
+  color: white;
+  padding: 12px 24px;        /* thoda bada padding */
+  border-radius: 8px;        /* rounded corners */
+  font-weight: 500;
+  font-size: 16px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15); /* soft shadow */
+  z-index: 1000;
+  animation: slideDown 0.3s ease-out; /* optional animation */
+}
+
+/* simple slide down animation */
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateX(-50%) translateY(-20px)
+  }
+  to {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0)
+  }
+}
+

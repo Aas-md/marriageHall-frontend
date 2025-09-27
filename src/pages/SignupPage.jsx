@@ -2,7 +2,7 @@ import { useEffect, useState } from "react"
 import { IoEye } from "react-icons/io5"
 import { IoMdEyeOff } from "react-icons/io"
 import { authSignup } from "../controller/authController"
-
+ import toast from "react-hot-toast";
 
 export default function SignupPage() {
 
@@ -14,12 +14,14 @@ export default function SignupPage() {
 
     let handleSubmit = async (event) => {
         event.preventDefault()
-        console.log(username,password,email)
+        console.log(username, password, email)
         try {
             const res = await authSignup(username, password, email)
-            console.log("Signup success:", res)
+            localStorage.setItem("flash", "Signup successful!")
+            window.location = "/";
         } catch (err) {
-            alert(err.message)
+            console.log(err)
+             toast.error("Signup failed! " + err.msg)
         }
     }
 
@@ -45,19 +47,19 @@ export default function SignupPage() {
                 <form noValidate className="needs-validation" onSubmit={handleSubmit}>
                     <div className="mb-3 form-group">
                         <label htmlFor="username" className="form-label">username :</label>
-                        <input type="text" className="form-control" id="username" required onChange={(e) =>setUsername( e.target.value)} />
+                        <input type="text" className="form-control" id="username" required onChange={(e) => setUsername(e.target.value)} />
                         <div className="valid-feedback">Loosk Good!</div>
                     </div>
 
 
                     <div className="mb-3 form-group">
                         <label htmlFor="email" className="form-label">email :</label>
-                        <input type="email" className="form-control" id="email" required onChange={(e) => setEmail( e.target.value)} />
+                        <input type="email" className="form-control" id="email" required onChange={(e) => setEmail(e.target.value)} />
                     </div>
 
                     <div className="mb-3 form-group">
                         <label htmlFor="password" className="form-label">password :</label>
-                        <input type={showPassword ? "text" : "password"} className="form-control" id="password" required onChange={(e) =>setPassword( e.target.value)} />
+                        <input type={showPassword ? "text" : "password"} className="form-control" id="password" required onChange={(e) => setPassword(e.target.value)} />
                         <button
                             type="button"
                             onClick={() => setShowPassword(!showPassword)}

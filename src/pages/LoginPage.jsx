@@ -2,12 +2,16 @@ import { useState } from "react"
 import { IoEye } from "react-icons/io5";
 import { IoMdEyeOff } from "react-icons/io";
 import { login } from "../controller/authController";
+import { Toaster } from "react-hot-toast";
+ import toast from "react-hot-toast";
+
 
 export default function LoginPage() {
 
     const [showPassword, setShowPassword] = useState(false)
     const [username, setUsername] = useState("")
     const [password, setPassword] = useState("")
+     const [flash, setFlash] = useState("");
 
     const handleSubmit = async (event) => {
         event.preventDefault()
@@ -15,9 +19,16 @@ export default function LoginPage() {
             const res = await login(username, password)
             setPassword('')
             setUsername('')
-            console.log("Signup success:", res)
+            
+            setTimeout(() => setFlash(""), 3000);
+              localStorage.setItem("flash", "Login successful!") 
+              window.location = "/";
+               
+            //yaha par tere ko kuchh karna hai shayad
+
         } catch (err) {
             console.error(err.message)
+             toast.error("Login failed! Please check your credentials." + err.message);
         }
 
 

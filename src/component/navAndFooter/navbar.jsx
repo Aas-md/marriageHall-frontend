@@ -4,27 +4,53 @@ import { IoSearch } from "react-icons/io5"
 import 'bootstrap/dist/js/bootstrap.bundle.min.js'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import { useNavigate } from "react-router-dom"
+import { useEffect, useState } from 'react'
+
 
 export default function Navbar() {
 
-   const navigate = useNavigate()
-  let handleSignup = ()=>{
-     
-        navigate("/signup")
+  const navigate = useNavigate()
+  const [isLoggedIn, setIsLoggedIn] = useState(false)
+  const [flash, setFlash] = useState("");
+
+  useEffect(() => {
+    handleIsLogedIn()
+    const msg = localStorage.getItem("flash")
+    if (msg) {
+      setFlash(msg);
+      localStorage.removeItem("flash"); // ek baar show hone ke baad remove
+      setTimeout(() => setFlash(""), 3000);
+    }
+  }, [])
+
+
+  let handleIsLogedIn = () => {
+    setIsLoggedIn(localStorage.getItem("token") ? true : false)
+  }
+  let handleSignup = () => {
+
+    navigate("/signup")
+    handleIsLogedIn()
+  }
+
+  let handleLogin = () => {
+
+    navigate('/LoginPage')
+    handleIsLogedIn()
+  }
+
+  let handleLogout = () => {
+    localStorage.removeItem("token");
+    setIsLoggedIn(false);
   }
 
   const handleHomeNavigate = () => {
-    navigate(`/`) // navigation inside component
+    navigate(`/`)
   };
-
-  let handleLogin = ()=>{
-
-    navigate('/LoginPage')
-  }
 
   return (
     <nav className="navbar fixed-top navbar-expand-md ">
-  
+      {flash && <div className="flash-msg">{flash}</div>}
       <div className="logo d-flex align-items-center">
         <FaTentArrowsDown onClick={handleHomeNavigate} className="icon me-2" />
         <span onClick={handleHomeNavigate}>Explore</span>
@@ -40,33 +66,43 @@ export default function Navbar() {
         <span className="navbar-toggler-icon"></span>
       </button>
 
-    <div className="collapse navbar-collapse" id="menu">
-  {/* Search bar */}
-  <div className="nav-input mx-auto flex-column flex-md-row d-flex mb-2 mb-md-0">
-    <form className="d-flex w-100 ">
-      <input
-        className="form-control me-2"
-        type="search"
-        placeholder="Search"
-        aria-label="Search"
-      />
-      <button
-        className="btn d-flex align-items-center gap-2"
-        type="submit"
-      >
-        <IoSearch /> Search
-      </button>
-    </form>
-  </div>
+      <div className="collapse navbar-collapse" id="menu">
+        {/* Search bar */}
+        <div className="nav-input mx-auto flex-column flex-md-row d-flex mb-2 mb-md-0">
+          <form className="d-flex w-100 ">
+            <input
+              className="form-control me-2"
+              type="search"
+              placeholder="Search"
+              aria-label="Search"
+            />
+            <button
+              className="btn d-flex align-items-center gap-2"
+              type="submit"
+            >
+              <IoSearch /> Search
+            </button>
+          </form>
+        </div>
 
-  {/* Buttons */}
-  <div className="buttons ms-auto d-flex flex-column flex-md-row">
-    <span >Add new listing</span>
-    <span onClick={handleSignup}>Signup</span>
-    <span onClick={handleLogin}>Login</span>
-    <span className='logout'>Logout</span>
-  </div>
-</div>
+        {/* Buttons */}
+        <div className="buttons ms-auto d-flex flex-column flex-md-row">
+          <span >Add new listing</span>
+
+          {!isLoggedIn && (
+            <>
+              <span onClick={handleSignup}>Signup</span>
+              <span onClick={handleLogin}>Login</span>
+            </>
+          )}
+
+          {isLoggedIn && (
+            <span className="logout" onClick={handleLogout}>
+              Logout
+            </span>
+          )}
+        </div>
+      </div>
 
     </nav>
   );
