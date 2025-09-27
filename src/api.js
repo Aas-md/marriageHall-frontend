@@ -123,7 +123,8 @@ export async function loginApi(username = "", password = "") {
     // response ko json me convert karo
     const data = await res.json()
     localStorage.setItem('token', data.token)
-    console.log(data.token)
+    localStorage.setItem('user', JSON.stringify(data.user))
+
 
     // jo bhi backend return kare (token, user info etc.)
     console.log(data)
@@ -157,13 +158,15 @@ export async function signup(username = "", password = "", email = "") {
       // convert error body if needed
       const errorData = await res.json();
       throw errorData || "Signup failed"; //
-    
+
     }
 
     // parse JSON response
     const data = await res.json()
 
     localStorage.setItem('token', data.token)
+    localStorage.setItem('user', JSON.stringify(data.user))
+
 
     return data;
   } catch (err) {
@@ -171,6 +174,76 @@ export async function signup(username = "", password = "", email = "") {
     throw err // rethrow so caller can handle
   }
 }
+
+
+
+export async function addListingApi(title, description, price, city, address, imageFile) {
+
+  try {
+    const formData = new FormData();
+    formData.append("listing[title]", title);
+    formData.append("listing[desc]", description);
+    formData.append("listing[price]", price);
+    formData.append("listing[city]", city);
+    formData.append("listing[address]", address);
+    if (imageFile) formData.append("listing[image]", imageFile); // must match backend field name
+
+    const token = localStorage.getItem("token"); // <-- get token
+    let url = 'http://localhost:3000/listings/'
+
+    const res = await fetch(url, {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${token}`, // include token for auth
+      },
+      body: formData, // multipart/form-data
+    });
+
+    if (!res.ok) {
+
+      const errorData = await res.json();
+      throw errorData || "Failed to add listing!"; //
+
+    }
+
+    const data = await res.text()// backend sends a simple text message
+    console.log("Success:", data)
+
+  } catch (err) {
+    throw err
+  }
+};
+
+export async function deleteListingApi(listingId) {
+  const url = `http://localhost:3000/listings/${listingId}`;
+
+  try {
+    const token = localStorage.getItem("token");
+
+    const res = await fetch(url, {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+        ...(token && { Authorization: `Bearer ${token}` }), // optional
+      },
+    });
+
+    if (!res.ok) {
+
+      let err;
+      err = await res.json()
+      throw err || "Failed to delete listing"
+
+    }
+
+    return await res.json()
+
+  } catch (err) {
+    throw err
+  }
+}
+
+
 
 
 

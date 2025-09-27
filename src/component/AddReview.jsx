@@ -15,8 +15,8 @@ export default function AddReview({ listingId, onAdded }) {
         setValidated(true)
         let res = await addReviewCntr(listingId, comment, rating)
         onAdded?.(res.review)
-        setComment('');
-        setRating(3);
+        setComment('')
+        setRating(3)
 
     }
 

@@ -1,6 +1,6 @@
 import { HomeCard } from "../component/homeCard.jsx"
 import './homepage.css'
-import getAllListings from "../controller/homeController.js"
+import { getAllListings } from "../controller/listingController.js";
 import { useEffect, useRef, useState } from "react"
 
 export function HomePage() {

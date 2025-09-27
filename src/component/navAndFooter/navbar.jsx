@@ -39,14 +39,19 @@ export default function Navbar() {
     handleIsLogedIn()
   }
 
-  let handleLogout = () => {
-    localStorage.removeItem("token");
-    setIsLoggedIn(false);
-  }
+    let handleLogout = () => {
+      localStorage.removeItem("token")
+      localStorage.removeItem('user')
+      setIsLoggedIn(false);
+    }
 
   const handleHomeNavigate = () => {
     navigate(`/`)
   };
+
+  const handleAddListing = ()=>{
+    navigate('/addListing')
+  }
 
   return (
     <nav className="navbar fixed-top navbar-expand-md ">
@@ -87,7 +92,7 @@ export default function Navbar() {
 
         {/* Buttons */}
         <div className="buttons ms-auto d-flex flex-column flex-md-row">
-          <span >Add new listing</span>
+          <span onClick={handleAddListing} >Add new listing</span>
 
           {!isLoggedIn && (
             <>

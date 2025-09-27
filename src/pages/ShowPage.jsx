@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import ShowCard from "../component/ShowCard";
 import './showpage.css'
-import getListing from "../controller/showController";
+import { getListing } from "../controller/listingController";
 import Review from "../component/review";
 import AddReview from "../component/AddReview";
 import { useParams } from "react-router-dom";
@@ -38,7 +38,6 @@ export default function ShowPage() {
 
             let data = await getListing(listingId)
             setListing(data)
-            console.log(data)
             if (data.reviews?.length > 0) {
                 setReviews(data.reviews) 
             }
@@ -50,6 +49,7 @@ export default function ShowPage() {
     return (
         <div className="show-page">
             <ShowCard listing={listing} />
+            
             <hr />
             <h1>Leave a review</h1>
             <AddReview listingId={listing.id} onAdded={handleReviewAdded} />

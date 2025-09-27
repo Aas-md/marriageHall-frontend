@@ -9,7 +9,8 @@ export default function mapListing(data){
             image : data.image?.url,
             price : data.price,
            ownerName : data.owner?.username,
-           reviews : data.reviews
+           reviews : data.reviews,
+           owner : data.owner
         }
 
         return curr
