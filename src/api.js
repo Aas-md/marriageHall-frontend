@@ -46,7 +46,7 @@ export async function addReview(listingId, comment, rating) {
 
   try {
     const token = localStorage.getItem('token')
-    console.log("token ->", token)
+ 
     const response = await fetch(url, {
       method: 'POST',
       headers: {
@@ -127,7 +127,7 @@ export async function loginApi(username = "", password = "") {
 
 
     // jo bhi backend return kare (token, user info etc.)
-    console.log(data)
+ 
     return data
   } catch (err) {
     console.log('error in Login', err)
@@ -240,6 +240,13 @@ export async function deleteListingApi(listingId) {
 
   } catch (err) {
     throw err
+  }
+}
+
+export async function editListingApi(title, description, price, city, address, imageFile){
+
+   if (newImageFile) { // user ne nayi image select ki
+    formData.append('image', newImageFile);
   }
 }
 

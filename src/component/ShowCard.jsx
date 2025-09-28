@@ -1,35 +1,42 @@
 import { useEffect, useState } from 'react'
 import './showcard.css'
 import { deleteListing } from '../controller/listingController'
+import toast from "react-hot-toast";
+import { useNavigate } from "react-router-dom"
 
 export default function ShowCard({ listing: listing }) {
 
     let [isOwner, setIsOwner] = useState(false)
+    const navigate = useNavigate()
 
     useEffect(() => {
 
         if (!listing) return
 
-        const user = JSON.parse(localStorage.getItem("user"))
 
-      
-        if (listing.owner?._id == user.id) {
+        const user = JSON.parse(localStorage.getItem("user"))
+        
+
+        if (listing.owner?._id == user?.id) {
             setIsOwner(true)
         }
 
     }, [listing])
 
-
-
-
-
     let handleDelete = async () => {
-      try{
-        await deleteListing(listing.id)
-        console.log("listing deleted successfuly")
-      }catch(err){
-        console.log(err)
-      }
+        try {
+            await deleteListing(listing.id)
+            localStorage.setItem("flash", "Listing Deleted Successfully!")
+            window.location = "/"
+        } catch (err) {
+            console.log(err)
+            toast.error("Failed To Delete " + err.msg)
+        }
+    }
+
+
+    let handleEdit = async () => {
+       navigate("/EditListing", { state: { listing } })
     }
 
     let imageUrl = listing.image ? listing.image : "https://images.unsplash.com/photo-1618773928121-c32242e63f39?w=400&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8aG90ZWwlMjByb29tfGVufDB8fDB8fHww"
@@ -47,7 +54,7 @@ export default function ShowCard({ listing: listing }) {
                 isOwner && (<div className="btns-delete-edit">
 
                     <button className="btn btn-dark btn-add" onClick={handleDelete}>Delete</button>
-                    <button className="btn btn-dark ">Edit</button>
+                    <button className="btn btn-dark " onClick={handleEdit}>Edit</button>
 
                 </div>
                 )

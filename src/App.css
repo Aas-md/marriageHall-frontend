@@ -11,6 +11,7 @@
 
 .main-page {
   flex: 1; /* take remaining space */
+  margin-bottom: 1rem;
 }
 
 .eye-btn{

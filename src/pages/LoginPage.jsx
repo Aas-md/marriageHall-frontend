@@ -28,7 +28,7 @@ export default function LoginPage() {
 
         } catch (err) {
             console.error(err.message)
-             toast.error("Login failed! Please check your credentials." + err.message);
+             toast.error("Login failed! Please check your credentials." + err.message)
         }
 
 

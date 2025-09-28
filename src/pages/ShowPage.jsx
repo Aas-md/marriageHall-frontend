@@ -5,11 +5,13 @@ import { getListing } from "../controller/listingController";
 import Review from "../component/review";
 import AddReview from "../component/AddReview";
 import { useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom"
 
 
 export default function ShowPage() {
 
     const {listingId} = useParams()
+     const navigate = useNavigate()
  
     let alreadyFetched = false;
     let [listing, setListing] = useState([])
