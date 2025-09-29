@@ -46,7 +46,7 @@ export async function addReview(listingId, comment, rating) {
 
   try {
     const token = localStorage.getItem('token')
- 
+
     const response = await fetch(url, {
       method: 'POST',
       headers: {
@@ -127,7 +127,7 @@ export async function loginApi(username = "", password = "") {
 
 
     // jo bhi backend return kare (token, user info etc.)
- 
+
     return data
   } catch (err) {
     console.log('error in Login', err)
@@ -243,10 +243,47 @@ export async function deleteListingApi(listingId) {
   }
 }
 
-export async function editListingApi(title, description, price, city, address, imageFile){
+export async function editListingApi(title, description, price, city, address, imageFile, listingId) {
 
-   if (newImageFile) { // user ne nayi image select ki
-    formData.append('image', newImageFile);
+  let url = `http://localhost:3000/listings/${listingId}`
+
+
+  try {
+    const formData = new FormData();
+    formData.append("listing[title]", title)
+    formData.append("listing[desc]", description)
+    formData.append("listing[price]", price)
+    formData.append("listing[city]", city)
+    formData.append("listing[address]", address)
+
+    if (imageFile) { // user ne nayi image select ki
+     formData.append("listing[image]", imageFile)
+    }
+
+    const token = localStorage.getItem("token")
+    console.log(token)
+
+    const res = await fetch(url, {
+      method: "PUT",
+      headers: {
+        Authorization: `Bearer ${token}`, // include token for auth
+      },
+      body: formData, // multipart/form-data
+    })
+
+    if (!res.ok) {
+
+      let err;
+      err = await res.json()
+      throw err || "Failed to delete listing"
+
+    }
+
+    return await res.json()
+
+
+  } catch (err) {
+    throw err
   }
 }
 

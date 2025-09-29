@@ -39,17 +39,19 @@ export default function Navbar() {
     handleIsLogedIn()
   }
 
-    let handleLogout = () => {
-      localStorage.removeItem("token")
-      localStorage.removeItem('user')
-      setIsLoggedIn(false);
-    }
+  let handleLogout = () => {
+    localStorage.removeItem("token")
+    localStorage.removeItem('user')
+    setIsLoggedIn(false)
+    localStorage.setItem("flash", "Logged out Successful!")
+    window.location = `/`
+  }
 
   const handleHomeNavigate = () => {
     navigate(`/`)
   };
 
-  const handleAddListing = ()=>{
+  const handleAddListing = () => {
     navigate('/addListing')
   }
 

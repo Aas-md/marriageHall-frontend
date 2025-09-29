@@ -1,30 +1,60 @@
 import { useState } from "react"
 import { useLocation } from "react-router-dom"
+import { edidListing } from "../controller/listingController"
+import { useNavigate } from "react-router-dom"
+import toast from "react-hot-toast";
+import ProgressDialog from '../utils/ProgressDialoge';
 
 export default function EditListingPage() {
     const location = useLocation()
 
     const { listing } = location.state || {}
+    const navigate = useNavigate()
+    const [loading, setListing] = useState(false)
 
     // console.log('listing in edit listing -> ', listing)
-    let [title, setTitle] = useState(listing.title)
-    let [description, setDescription] = useState(listing.desc)
-    let [price, setPrice] = useState(listing.price)
-    let [city, setCity] = useState(listing.city)
-    let [address, setAddress] = useState(listing.address)
+    let [title, setTitle] = useState(listing?.title)
+    let [description, setDescription] = useState(listing?.desc)
+    let [price, setPrice] = useState(listing?.price)
+    let [city, setCity] = useState(listing?.city)
+    let [address, setAddress] = useState(listing?.address)
+
     const [imageFile, setImageFile] = useState(null)
-    const [loading, setLoading] = useState(false)
 
 
-    const handleOnSubmit = async (event) => {
-        console.log("hello submit")
+
+    const handleOnSubmit = async (e) => {
+        e.preventDefault();
+
+        try {
+
+            const form = e.currentTarget
+            if (!form.checkValidity()) {
+                form.classList.add("was-validated")
+                return
+            }
+
+            setListing(true)
+            let res = await edidListing(title, description, price, city, address, imageFile, listing?.id)
+
+            localStorage.setItem("flash", "Listing Updated Successful!")
+            window.location = `/showpage/${listing?.id}`
+            console.log(res)
+        } catch (err) {
+
+            console.log("error in update listing " + JSON.stringify(err))
+            toast.error("Updation Failed! " + err.msg)
+        } finally {
+            setListing(false)
+        }
+
     }
 
 
     return (
         <div className="row mt-3">
             <div className="col-8 offset-2">
-                {/* <ProgressDialog open={loading} message="Adding listing…" /> */}
+                <ProgressDialog open={loading} message="Adding listing…" />
                 <form onSubmit={handleOnSubmit} noValidate className="needs-validation" encType="multipart/form-data">
                     <div className="mb-3 form-group">
                         <label htmlFor="title" className="form-label">Title</label>

@@ -1,4 +1,4 @@
-import { addListingApi, deleteListingApi, fetchAllListings } from "../api";
+import { addListingApi, deleteListingApi, editListingApi, fetchAllListings } from "../api";
 import { fetchListing } from "../api";
 
 
@@ -20,4 +20,8 @@ export async function addListing(title,description,price,city,address,imageFile)
 
 export async function deleteListing(listingId){
     return await deleteListingApi(listingId)
+}
+
+export async function edidListing(title,description,price,city,address,imageFile,listingId){
+    return await editListingApi(title,description,price,city,address,imageFile,listingId)
 }

@@ -37,12 +37,12 @@ export default function AddListingPage() {
             form.classList.add("was-validated")
             return
         }
-        setLoading(true);
+        setLoading(true)
         try {
 
             await addListing(title, description, price, city, address, imageFile)
             console.log("Added succesffully")
-            localStorage.setItem("flash", "Added successful!")
+            localStorage.setItem("flash", "Added successfully!")
             window.location = "/";
 
         } catch (err) {
