@@ -1,15 +1,41 @@
-.review{
+.review {
    display: flex;
    flex-direction: column;
    gap: 0.7rem;
    border: 1px solid rgba(128, 128, 128, 0.5);
    border-radius: 0.5rem;
    padding: 0.5rem;
-    width: 48%;
+   width: 49%;
 }
 
-.review .btn{
-     margin-top: auto;
+.review .btn {
+   margin-top: auto;
    align-self: flex-start;
-     
+
 }
+
+.star-icon {
+   width: 30px;
+   height: 30px;
+}
+
+@media(max-width : 720px) {
+   .star-icon {
+      width: 25px;
+      height: 25px;
+   }
+
+}
+
+@media(max-width : 480px) {
+   .star-icon {
+      width: 20px;
+      height: 20px;
+   }
+
+   .review{
+   gap: 0.4rem;
+   }
+
+}
+

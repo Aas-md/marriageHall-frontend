@@ -1,5 +1,6 @@
 .show-page{
-    padding: 2rem 13rem;
+    padding: 2rem 12rem;
+  
 }
 
 .show-page .reviews{
@@ -8,3 +9,16 @@
     justify-content: space-between;
     row-gap: 1rem;
 }
+
+@media(max-width : 720px){
+    .show-page{
+        padding: 2rem 3rem;
+    }
+}
+
+@media(max-width : 480px){
+    .show-page{
+        padding: 1rem 1rem;
+    }
+}
+

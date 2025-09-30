@@ -53,8 +53,9 @@ export default function EditListingPage() {
 
     return (
         <div className="row mt-3">
-            <div className="col-8 offset-2">
+             <div className="col-12  col-md-8 offset-md-2  add-listing">
                 <ProgressDialog open={loading} message="Adding listing…" />
+                 <h2>Edit This Listing</h2>
                 <form onSubmit={handleOnSubmit} noValidate className="needs-validation" encType="multipart/form-data">
                     <div className="mb-3 form-group">
                         <label htmlFor="title" className="form-label">Title</label>

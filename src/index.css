@@ -6,6 +6,19 @@
 }
 
   body {
-  padding-top: 73px; /* Navbar ki height ke barabar */
+  /* padding-top: 73px; Navbar ki height ke barabar */
+   padding-top: 4.5625rem; 
+}
+
+@media (max-width: 768px) {
+  html {
+    font-size: 16px; /* tablet */
+  }
+}
+
+@media (max-width: 480px) {
+  html {
+    font-size: 14px; /* desktop/laptop */
+  }
 }
 

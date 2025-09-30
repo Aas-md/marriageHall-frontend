@@ -40,13 +40,14 @@ export default function Review({ review, listingId, onDeleted }) {
   return (
 
     <div className='review'>
-      <h3 className='username'>{review.author?.username}</h3>
+      <h3 className='username'>@{review.author?.username}</h3>
 
       <div className="rating">
         {[1, 2, 3, 4, 5].map(n => (
           <FaStar
             key={n}
-            size={30}
+            // size={30}
+              className="star-icon"
             color={n <= review.rating ? "gold" : "lightgray"}
             style={{ marginRight: 5 }}
           />
