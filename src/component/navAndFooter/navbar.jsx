@@ -28,14 +28,14 @@ export default function Navbar() {
     setIsLoggedIn(localStorage.getItem("token") ? true : false)
   }
   let handleSignup = () => {
-
-    navigate("/signup")
+    window.location = '/signup'
+    // navigate("/signup")
     handleIsLogedIn()
   }
 
   let handleLogin = () => {
-
-    navigate('/LoginPage')
+      window.location = '/LoginPage'
+    // navigate('/LoginPage')
     handleIsLogedIn()
   }
 

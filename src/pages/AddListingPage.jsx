@@ -46,8 +46,8 @@ export default function AddListingPage() {
             window.location = "/";
 
         } catch (err) {
-            console.log("Failed To Add Listing" + JSON.stringify(err))
-            toast.error("Signup failed! " + err.msg)
+            console.log("Failed To Add Listing " + (JSON.stringify(err) == {} || "No Internet"))
+            toast.error("Signup failed! " + (err.msg || "No Internet"))
         } finally {
             setLoading(false)
         }

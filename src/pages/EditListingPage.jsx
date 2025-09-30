@@ -42,8 +42,8 @@ export default function EditListingPage() {
             console.log(res)
         } catch (err) {
 
-            console.log("error in update listing " + JSON.stringify(err))
-            toast.error("Updation Failed! " + err.msg)
+            console.log("error in update listing " + (JSON.stringify(err) || "No internet"))
+            toast.error("Updation Failed! " + (err.msg || "Please check your internet connetion!"))
         } finally {
             setListing(false)
         }

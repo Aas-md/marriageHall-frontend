@@ -4,6 +4,7 @@ import { IoMdEyeOff } from "react-icons/io";
 import { login } from "../controller/authController";
 import { Toaster } from "react-hot-toast";
 import toast from "react-hot-toast";
+import ProgressDialog from '../utils/ProgressDialoge';
 
 
 export default function LoginPage() {
@@ -11,24 +12,28 @@ export default function LoginPage() {
     const [showPassword, setShowPassword] = useState(false)
     const [username, setUsername] = useState("")
     const [password, setPassword] = useState("")
-    const [flash, setFlash] = useState("");
+    const [flash, setFlash] = useState("")
+    const [loading, setLoading] = useState(false)
 
     const handleSubmit = async (event) => {
         event.preventDefault()
+        setLoading(true)
         try {
             const res = await login(username, password)
             setPassword('')
             setUsername('')
 
-            setTimeout(() => setFlash(""), 3000);
+            setTimeout(() => setFlash(""), 3000)
             localStorage.setItem("flash", "Login successful!")
             window.location = "/";
 
             //yaha par tere ko kuchh karna hai shayad
 
         } catch (err) {
-            console.error(err.message)
+            console.log("Error : " +( err || "No Internet"))
             toast.error("Login failed! Please check your credentials." + err.message)
+        }finally{
+            setLoading(false)
         }
 
 
@@ -38,6 +43,7 @@ export default function LoginPage() {
         <div className="mt-4 mb-4 row mt-3">
 
             <div className="col-12 col-md-6 offset-md-3 add-listing">
+                 <ProgressDialog open={loading} message="Adding listing…" />
                 <h1>Login on Marriage Hall</h1>
             
                 <form noValidate className="needs-validation" onSubmit={handleSubmit}>

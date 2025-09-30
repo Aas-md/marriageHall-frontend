@@ -25,7 +25,9 @@ export default function ShowCard({ listing: listing }) {
 
     let handleDelete = async () => {
         try {
+            console.log(listing.id)
             await deleteListing(listing.id)
+            
             localStorage.setItem("flash", "Listing Deleted Successfully!")
             window.location = "/"
         } catch (err) {

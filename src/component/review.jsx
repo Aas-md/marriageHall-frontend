@@ -16,7 +16,7 @@ export default function Review({ review, listingId, onDeleted }) {
  
 
     if (!review || !review.author || !user) return
-    console.log(review, user)
+    
 
 
     if (review?.author?._id == user.id) setIsOwner(true)
