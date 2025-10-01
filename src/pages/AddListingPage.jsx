@@ -42,7 +42,7 @@ export default function AddListingPage() {
 
             await addListing(title, description, price, city, address, imageFile)
             console.log("Added succesffully")
-            localStorage.setItem("flash", "Added successfully!")
+            localStorage.setItem("flash", "Listing Added successfully!")
             window.location = "/";
 
         } catch (err) {

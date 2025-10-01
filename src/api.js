@@ -1,15 +1,16 @@
 import mapListings from "./mappers/homeMapper";
 import mapListing from "./mappers/listingMapper";
+let baseUrl = 'https://marriage-hall-backend-4t7g.onrender.com'
 
 export async function fetchAllListings() {
-  let url = 'http://localhost:3000/listings'
+  let url = `${baseUrl}/listings`
 
   const controller = new AbortController()
-  const timeout = setTimeout(() => controller.abort(), 2000) // 5 seconds
+  const timeout = setTimeout(() => controller.abort(), 2000) 
 
   let response = await fetch(url, { signal: controller.signal })
 
-  clearTimeout(timeout) // cleanup timeout after fetch
+  clearTimeout(timeout) 
 
   if (!response.ok) {
     const errorData = await response.json()
@@ -23,9 +24,9 @@ export async function fetchAllListings() {
 
 export async function fetchListing(listingId) {
 
-  let url = `http://localhost:3000/listings/${listingId}`
+  let url = `${baseUrl}/listings/${listingId}`
   const controller = new AbortController()
-  const timeout = setTimeout(() => controller.abort(), 2000) // 5 seconds
+  const timeout = setTimeout(() => controller.abort(), 2000) 
 
   let response = await fetch(url, { signal: controller.signal })
 
@@ -48,20 +49,21 @@ export async function addListingApi(title, description, price, city, address, im
   formData.append("listing[price]", price);
   formData.append("listing[city]", city);
   formData.append("listing[address]", address);
-  if (imageFile) formData.append("listing[image]", imageFile); // must match backend field name
+  if (imageFile) formData.append("listing[image]", imageFile); 
 
-  const token = localStorage.getItem("token"); // <-- get token
-  let url = 'http://localhost:3000/listings/'
+  const token = localStorage.getItem("token"); 
+  let url = `${baseUrl}/listings/`
 
   const controller = new AbortController()
-  const timeout = setTimeout(() => controller.abort(), 6000) // 5 seconds
+  const timeout = setTimeout(() => controller.abort(), 9000) 
 
-  const res = await fetch(url , { signal: controller.signal }, {
+  const res = await fetch(url , {
+      signal: controller.signal ,
     method: "POST",
     headers: {
-      Authorization: `Bearer ${token}`, // include token for auth
+      Authorization: `Bearer ${token}`, 
     },
-    body: formData, // multipart/form-data
+    body: formData, 
   })
 
   clearTimeout(timeout)
@@ -69,19 +71,19 @@ export async function addListingApi(title, description, price, city, address, im
   if (!res.ok) {
 
     const errorData = await res.json()
-    throw errorData || "Failed to add listing!" //
+    throw errorData || "Failed to add listing!" 
 
   }
 
-  const data = await res.text()// backend sends a simple text message
-  console.log("Success:", data)
+  const data = await res.text()
+ 
 
 };
 
 
 export async function editListingApi(title, description, price, city, address, imageFile, listingId) {
 
-  let url = `http://localhost:3000/listings/${listingId}`
+  let url = `${baseUrl}/listings/${listingId}`
 
   const formData = new FormData();
   formData.append("listing[title]", title)
@@ -90,24 +92,22 @@ export async function editListingApi(title, description, price, city, address, i
   formData.append("listing[city]", city)
   formData.append("listing[address]", address)
 
-  if (imageFile) { // user ne nayi image select ki
+  if (imageFile) {
     formData.append("listing[image]", imageFile)
   }
 
   const token = localStorage.getItem("token")
-  console.log(token)
-
 
   const controller = new AbortController()
-  const timeout = setTimeout(() => controller.abort(), 3000) // 5 seconds
+  const timeout = setTimeout(() => controller.abort(), 9000)
 
   const res = await fetch(url, {
     signal : controller.signal,
     method: "PUT",
     headers: {
-      Authorization: `Bearer ${token}`, // include token for auth
+      Authorization: `Bearer ${token}`, 
     },
-    body: formData, // multipart/form-data
+    body: formData,
   })
 
   clearTimeout(timeout)
@@ -126,12 +126,12 @@ export async function editListingApi(title, description, price, city, address, i
 
 export async function addReview(listingId, comment, rating) {
 
-  let url = `http://localhost:3000/listings/${listingId}/reviews`
+  let url = `${baseUrl}/listings/${listingId}/reviews`
 
   const token = localStorage.getItem('token')
 
   const controller = new AbortController()
-  const timeout = setTimeout(() => controller.abort(), 6000) // 5 seconds
+  const timeout = setTimeout(() => controller.abort(), 6000) 
 
   const response = await fetch(url, {
     signal : controller.signal,
@@ -152,8 +152,7 @@ export async function addReview(listingId, comment, rating) {
   clearTimeout(timeout)
 
   if (!response.ok) {
-    // If your server sends an error, handle it here
-    const errorText = await response.text()
+    const errorText = await response.json()
     throw errorText || 'Failed to add review'
   }
 
@@ -164,7 +163,7 @@ export async function addReview(listingId, comment, rating) {
 
 export async function deleteReviewApi(listingId, reviewId) {
 
-  const url = `http://localhost:3000/listings/${listingId}/reviews/${reviewId}`;
+  const url = `${baseUrl}/listings/${listingId}/reviews/${reviewId}`;
   const token = localStorage.getItem('token');
 
     const controller = new AbortController()
@@ -192,7 +191,7 @@ export async function deleteReviewApi(listingId, reviewId) {
 
 
 export async function loginApi(username = "", password = "") {
-  const url = "http://localhost:3000/login"
+  const url = `${baseUrl}/login`
   if (!username || !password) {
     throw "Please fill all the fields"
   }
@@ -213,8 +212,6 @@ export async function loginApi(username = "", password = "") {
   clearTimeout(timeout)
 
   if (!res.ok) {
-    // agar status 200–299 nahi hai to error
-    console.log('res.ok is not okay')
     const errText = await res.text()
     throw errText || "Login failed in !res.ok"
   }
@@ -226,11 +223,10 @@ export async function loginApi(username = "", password = "") {
   return data
 }
 
-
 export async function signup(username = "", password = "", email = "") {
-  const url = "http://localhost:3000/signup";
+  const url = `${baseUrl}/signup`;
 
-  // simple check
+  
   if (!username || !password || !email) {
     throw  "Please fill all the fields"
   }
@@ -250,13 +246,13 @@ export async function signup(username = "", password = "", email = "") {
   clearTimeout(timeout)
 
   if (!res.ok) {
-    // convert error body if needed
+  
     const errorData = await res.json();
     throw errorData || "Signup failed"; //
 
   }
 
-  // parse JSON response
+
   const data = await res.json()
 
   localStorage.setItem('token', data.token)
@@ -268,7 +264,7 @@ export async function signup(username = "", password = "", email = "") {
 
 export async function deleteListingApi(listingId) {
 
-  const url = `http://localhost:3000/listings/${listingId}`;
+  const url = `${baseUrl}/listings/${listingId}`;
 
   const token = localStorage.getItem("token")
 
@@ -280,7 +276,7 @@ export async function deleteListingApi(listingId) {
     method: "DELETE",
     headers: {
       "Content-Type": "application/json",
-      ...(token && { Authorization: `Bearer ${token}` }), // optional
+      ...(token && { Authorization: `Bearer ${token}` }),
     },
   })
 

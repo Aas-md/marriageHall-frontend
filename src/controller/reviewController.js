@@ -12,6 +12,5 @@ export async function addReviewCntr(listingId, comment, rating) {
 export async function deleteReview(listingId, reviewId) {
    
         const result = await deleteReviewApi(listingId, reviewId)
-        // console.log('Deleted:', result)
    
 }

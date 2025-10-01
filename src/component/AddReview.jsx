@@ -2,6 +2,8 @@ import { useState } from 'react'
 import { FaStar } from 'react-icons/fa'
 import './addReview.css'
 import { addReviewCntr } from '../controller/reviewController'
+import toast from 'react-hot-toast'
+import ProgressDialog from '../utils/ProgressDialoge';
 
 
 export default function AddReview({ listingId, onAdded }) {
@@ -9,22 +11,40 @@ export default function AddReview({ listingId, onAdded }) {
     let [rating, setRating] = useState(3)
     let [comment, setComment] = useState('')
     const [validated, setValidated] = useState(false)
+    const [loading, setLoading] = useState(false)
 
     let handleSubmit = async (e) => {
-        e.preventDefault() 
-        setValidated(true)
-        let res = await addReviewCntr(listingId, comment, rating)
-        onAdded?.(res.review)
-        setComment('')
-        setRating(3)
+        e.preventDefault()
+       
+
+        const form = e.currentTarget
+        if (!form.checkValidity()) {
+            form.classList.add("was-validated")
+            return
+        }
+        setLoading(true)
+
+        try {
+            let res = await addReviewCntr(listingId, comment, rating)
+            onAdded?.(res.review)
+            setComment('')
+            setRating(3)
+            toast.success('Review Added Successfully!')
+              
+        } catch (err) {
+            toast.error('Failed To Add Review! ' + err.msg)
+            console.log("failed to add review : " + err)
+        } finally {
+            setLoading(false)
+        }
 
     }
 
     return (
         <div className="add-review">
             <span >Rating</span>
-
-            <form noValidate className={`needs-validation ${validated ? "was-validated" : ""}`} onSubmit={handleSubmit}>
+            <ProgressDialog open={loading} message="Adding listing…" />
+            <form noValidate className={`needs-validation needs-validation`} onSubmit={handleSubmit}>
 
                 <div className="rating mb-3">
                     {[1, 2, 3, 4, 5].map(n => (

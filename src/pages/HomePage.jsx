@@ -24,7 +24,6 @@ export function HomePage() {
             
                     console.log('Some thing went wrong  : ' +  JSON.stringify(err))
                     setError(err.message || err.msg)
-                    console.log(error)
                 }
             }
         getListings()

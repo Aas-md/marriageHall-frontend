@@ -12,7 +12,6 @@ export default function EditListingPage() {
     const navigate = useNavigate()
     const [loading, setListing] = useState(false)
 
-    // console.log('listing in edit listing -> ', listing)
     let [title, setTitle] = useState(listing?.title)
     let [description, setDescription] = useState(listing?.desc)
     let [price, setPrice] = useState(listing?.price)
@@ -39,7 +38,6 @@ export default function EditListingPage() {
 
             localStorage.setItem("flash", "Listing Updated Successful!")
             window.location = `/showpage/${listing?.id}`
-            console.log(res)
         } catch (err) {
 
             console.log("error in update listing " + (JSON.stringify(err) || "No internet"))
