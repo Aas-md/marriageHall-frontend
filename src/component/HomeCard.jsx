@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import './Homecard.css'
+import './HomeCard.css'
 import { useNavigate } from "react-router-dom";
 
 
