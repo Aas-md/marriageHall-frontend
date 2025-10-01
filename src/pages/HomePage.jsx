@@ -1,4 +1,4 @@
-import { HomeCard } from "../component/homeCard.jsx"
+import { HomeCard } from "../component/HomeCard.jsx"
 import './homepage.css'
 import { getAllListings } from "../controller/listingController.js";
 import { useEffect, useRef, useState } from "react"
