@@ -2,7 +2,6 @@ import { useState } from "react"
 import { IoEye } from "react-icons/io5";
 import { IoMdEyeOff } from "react-icons/io";
 import { login } from "../controller/authController";
-import { Toaster } from "react-hot-toast";
 import toast from "react-hot-toast";
 import ProgressDialog from '../utils/ProgressDialoge';
 
